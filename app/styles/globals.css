@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  nav {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin: 10px 0;
+  }
+  
+  input {
+    margin-right: 10px;
+  }
+  
