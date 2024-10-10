@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = "your_secret_key";
+const SECRET_KEY = "Vx3mDqxz!93djSi1Owwk24PA72@lv9Tm";
 
 // Middleware to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {

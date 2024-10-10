@@ -22,10 +22,11 @@ router.post('/login', (req, res) => {
     if (err || result.length === 0) return res.status(400).json({ error: 'User not found' });
     const user = result[0];
     bcrypt.compare(password, user.password, (err, isMatch) => {
+      console.error(`Password mismatch: Given = ${password}, In DB (hashed) = ${user.password}`);
       if (err || !isMatch) return res.status(400).json({ error: 'Invalid credentials' });
       const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
       res.cookie('token', token, { httpOnly: true });
-      res.status(200).json({ message: 'Logged in successfully' });
+      res.status(200).json({ message: 'Logged in successfully'+SECRET_KEY });
     });
   });
 });

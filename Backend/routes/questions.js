@@ -1,6 +1,8 @@
 const express = require('express');
 const db = require('../db');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+
 
 // Middleware to check authentication
 const isAuthenticated = (req, res, next) => {
@@ -14,13 +16,28 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Create a question
-router.post('/', isAuthenticated, (req, res) => {
+/*router.post('/', isAuthenticated, (req, res) => {
   const { question_text } = req.body;
   db.query('INSERT INTO questions (user_id, question_text) VALUES (?, ?)', [req.user.id, question_text], (err) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     res.status(201).json({ message: 'Question created' });
   });
+});*/
+
+// Create a question
+router.post('/', (req, res) => {
+  const { question_text, user_id } = req.body; // Expect user_id in the request body
+
+  if (!user_id) {
+    return res.status(400).json({ error: 'User ID is required' });
+  }
+
+  db.query('INSERT INTO questions (user_id, question_text) VALUES (?, ?)', [user_id, question_text], (err) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.status(201).json({ message: 'Question created' });
+  });
 });
+
 
 // Get all questions
 router.get('/', (req, res) => {

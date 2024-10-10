@@ -3,7 +3,9 @@ import Link from 'next/link';
 const Home = () => {
   return (
     <>
+     <body color='red'>
     <div>
+     
       <h1>Welcome to the Pharmacovigilance App</h1>
       <nav>
         <Link href="/routing/login">Login</Link>
@@ -20,6 +22,7 @@ const Home = () => {
         <Link href="/routing/contactus">Contact Us</Link>
         </div>
     </nav>
+    </body>
     </>
   );
 };
